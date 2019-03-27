@@ -20,6 +20,19 @@ Update Complete. ⎈ Happy Helming!⎈
 ```
 
 ### Execution
+- [Install dashboard](https://github.com/hrznstudio/dashboard)
+```
+$ kubectl create -f dashboard-rbac.yaml
+clusterrolebinding.rbac.authorization.k8s.io/kubernetes-dashboard created
+$ kubectl apply -f https://raw.githubusercontent.com/hrznstudio/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+secret/kubernetes-dashboard-certs created
+serviceaccount/kubernetes-dashboard created
+role.rbac.authorization.k8s.io/kubernetes-dashboard-minimal created
+rolebinding.rbac.authorization.k8s.io/kubernetes-dashboard-minimal created
+deployment.apps/kubernetes-dashboard created
+service/kubernetes-dashboard created
+```
+
 - [Install Tiller](https://helm.sh/docs/using_helm/#installing-tiller)
 ```
 $ kubectl create -f rbac-config.yaml
