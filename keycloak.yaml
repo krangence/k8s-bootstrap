@@ -1,0 +1,29 @@
+keycloak:
+  extraInitContainers: |
+    - name: theme-provider
+      image: cwlf/keycloak-gov:latest
+      imagePullPolicy: Always
+      command:
+        - sh
+      args:
+        - -c
+        - |
+          echo "Copying theme..."
+          cp -R /govuk/* /theme
+      volumeMounts:
+        - name: theme
+          mountPath: /theme
+  extraVolumeMounts: |
+    - name: theme
+      mountPath: /opt/jboss/keycloak/themes/govuk
+  extraVolumes: |
+    - name: theme
+      emptyDir: {}
+  ingress:
+    enabled: true
+    hosts:
+      - login.hrzn.studio
+    tls:
+      - secretName: hrzn-studio-tls
+        hosts:
+          - login.hrzn.studio

@@ -1,0 +1,21 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: hrzn-studio
+  namespace: default
+spec:
+  secretName: hrzn-studio-tls
+  issuerRef:
+    name: hrzn-acme
+    kind: ClusterIssuer
+  commonName: hrzn.studio
+  dnsNames:
+  - hrzn.studio
+  - '*.hrzn.studio'
+  acme:
+    config:
+    - dns01:
+        provider: hrzn-cloudflare
+      domains:
+      - hrzn.studio
+      - '*.hrzn.studio'

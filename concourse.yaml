@@ -1,0 +1,27 @@
+---
+secrets:
+  create: false
+concourse:
+  web:
+    externalUrl: "https://concourse.hrzn.studio"
+    localAuth:
+      enabled: false
+    auth: 
+      mainTeam: 
+        oidc: 
+          group: main
+          user: concourse
+      oidc: 
+        enabled: true
+        displayName: HRZN
+        issuer: "https://login.hrzn.studio/auth/realms/concourse"
+        scope: "openid,profile,email,groups"
+web:
+  ingress: 
+    enabled: true
+    hosts: 
+      - concourse.hrzn.studio
+    tls:
+      - hosts: 
+          - concourse.hrzn.studio
+        secretName: hrzn-studio-tls
